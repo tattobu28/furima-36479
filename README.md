@@ -15,7 +15,7 @@
 
 ### Association
 - has_many :items
-- has_one :cart
+- has_many :carts
 
 ## itemsテーブル
 
@@ -28,13 +28,12 @@
 | shipping_fee_status_id | integer     | null: false                    |
 | prefecture_id          | integer     | null: false                    |
 | scheduled_delivery_id  | integer     | null: false                    |
-| price                  | string      | null: false                    |
+| price                  | integer     | null: false                    |
 | user                   | references  | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
 - has_one :cart
-- has_one :address
 
 ## addressesテーブル
 
@@ -46,10 +45,9 @@
 | addresses           | string      | null: false                    |
 | building            | string      | null: true                     |
 | phone_number        | string      | null: false                    |
-| user                | references  | null: false, foreign_key: true |
+| cart                | references  | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :item
 - belongs_to :cart
 
 ## cartsテーブル
