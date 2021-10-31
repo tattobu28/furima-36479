@@ -2,9 +2,13 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  private
+  validates :nickname, presence: true, length: { maximum: 40 }
+  validates :info, presence: true
+  validates :category_id, presence: true
+  validates :sales_status_id, presence: true
+  validates :shipping_fee_status_id, presence: true
+  validates :prefecture_id, presence: true
+  validates :scheduled_delivery_id, presence: true
+  validates :price, presence: true
 
-  def item_params
-    params.require(:item).permit(:image).merge(user_id: current_user.id)
-  end
 end
