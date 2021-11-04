@@ -7,7 +7,8 @@ RSpec.describe User, type: :model do
 
   describe 'ユーザー新規登録' do
     context '新規登録できる場合' do
-      it 'nickname,email,password,password_confirmation,last_name,first_name,last_name_kana,first_name_kana,birth_dateが存在すれば登録できる' do
+      it 'nickname,email,password,password_confirmation,
+            last_name,first_name,last_name_kana,first_name_kana,birth_dateが存在すれば登録できる' do
         expect(@user).to be_valid
       end
     end
@@ -58,7 +59,7 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Birth date can't be blank")
       end
       it 'nicknameが40文字以上では登録できない' do
-        @user.nickname = 'aaaaaaaaaa1234567890aaaaaaaaaa1234567890a'
+        @user.nickname = 'a' * 41
         @user.valid?
         expect(@user.errors.full_messages).to include('Nickname is too long (maximum is 40 characters)')
       end
