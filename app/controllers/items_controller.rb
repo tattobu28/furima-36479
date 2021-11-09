@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
+    @items = Item.all.order('created_at DESC')
   end
 
   def new
@@ -24,9 +25,5 @@ class ItemsController < ApplicationController
                                  :sales_status_id, :shipping_fee_status_id,
                                  :prefecture_id, :scheduled_delivery_id,
                                  :price).merge(user_id: current_user.id)
-  end
-
-  def move_to_signin
-    redirect_to new_user_session_path unless user_signed_in?
   end
 end
