@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
       @cart_address.save
       redirect_to root_path
     else
-      render:new
+      render :new
     end
   end
 
@@ -66,5 +66,8 @@ class ItemsController < ApplicationController
   end
 
   def cart_params
-    params.require(:cart_address).permit(:postal_code, :prefecture_id, :city, :addresses, :building, :phone_number).merge(user_id: current_user.id, item_id: current_item.id)
+    params.require(:cart_address).permit(:postal_code, :prefecture_id, :city, :addresses, :building, :phone_number).merge(
+      user_id: current_user.id, item_id: current_item.id
+    )
+  end
 end
