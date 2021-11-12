@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
 
-
   def index
     @item = Item.find(params[:item_id])
   end
@@ -22,7 +21,7 @@ class OrdersController < ApplicationController
   end
 
   private
-  
+
   def cart_params
     params.require(:cart_address).permit(:postal_code, :prefecture_id, :city, :addresses, :building, :phone_number).merge(
       user_id: current_user.id, item_id: params[:item_id]
