@@ -9,20 +9,11 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-    @cart_address = CartAddress.new
   end
 
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to root_path
-    else
-      render :new
-    end
-
-    @cart_address = CartAddress.new(cart_params)
-    if @cart_address.valid?
-      @cart_address.save
       redirect_to root_path
     else
       render :new
@@ -63,11 +54,5 @@ class ItemsController < ApplicationController
 
   def move_to_index
     redirect_to action: :index unless user_signed_in? && current_user.id == @item.user_id
-  end
-
-  def cart_params
-    params.require(:cart_address).permit(:postal_code, :prefecture_id, :city, :addresses, :building, :phone_number).merge(
-      user_id: current_user.id, item_id: current_item.id
-    )
   end
 end
