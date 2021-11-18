@@ -1,12 +1,13 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item, only: [:index, :new]
+
 
   def index
-    @item = Item.find(params[:item_id])
+    @cart_address = CartAddress.new
   end
 
   def new
-    @item = Item.find(params[:item_id])
     @cart_address = CartAddress.new
   end
 
@@ -16,7 +17,8 @@ class OrdersController < ApplicationController
       @cart_address.save
       redirect_to root_path
     else
-      render :new
+      @item = Item.find(params[:item_id])
+      render :index
     end
   end
 
@@ -26,5 +28,9 @@ class OrdersController < ApplicationController
     params.require(:cart_address).permit(:postal_code, :prefecture_id, :city, :addresses, :building, :phone_number).merge(
       user_id: current_user.id, item_id: params[:item_id]
     )
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 end
