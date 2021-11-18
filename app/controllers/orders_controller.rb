@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item, only: [:index, :new]
 
-
   def index
     @cart_address = CartAddress.new
   end
