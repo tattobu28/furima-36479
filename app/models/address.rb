@@ -1,4 +1,5 @@
 class Address < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :cart
-  has_one :prefecture
+  belongs_to :prefecture
 end
