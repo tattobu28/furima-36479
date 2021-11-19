@@ -60,7 +60,7 @@ RSpec.describe CartAddress, type: :model do
         @cart_address.valid?
         expect(@cart_address.errors.full_messages).to include('Phone number is invalid')
       end
-      it 'phone_numberが9桁以下では保存できない' do
+      it 'phone_numberが8桁未満では保存できない' do
         @cart_address.phone_number = '090123456'
         @cart_address.valid?
         expect(@cart_address.errors.full_messages).to include('Phone number is invalid')
